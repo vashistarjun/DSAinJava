@@ -1,14 +1,17 @@
 class Solution {
     public int findDuplicate(int[] nums) {
-        Map<Integer,Integer> map= new HashMap<>();
-        for(int num:nums){
-            if(map.containsKey(num)){
-                return num;
-            }
-            else{
-                map.put(num,1);
-            }
+       int s=nums[0];
+       int f=nums[0];
+        do{
+            s=nums[s];
+            f=nums[nums[f]];
         }
-        return -1;
+        while(f!=s);
+         f=nums[0];
+        while(f!=s){
+            s=nums[s];
+            f=nums[f];
+        }
+        return f;
     }
 }
