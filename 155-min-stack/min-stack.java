@@ -1,13 +1,17 @@
 class MinStack {
     int arr[];
+    int minSt[];
     int pointer;
     public MinStack() {
         arr= new int[10000];
+        minSt= new int[10000];
         pointer=-1;
     }
     
     public void push(int val) {
         arr[++pointer]=val;
+        if(pointer==0) minSt[pointer]=val;
+        else minSt[pointer]=Math.min(val,minSt[pointer-1]);
     }
     
     public void pop() {
@@ -20,11 +24,7 @@ class MinStack {
     }
     
     public int getMin() {
-        int min=arr[0];
-        for(int i=0;i<=pointer;i++){
-            min=Math.min(min,arr[i]);
-        }
-        return min;
+       return minSt[pointer];
     }
 }
 
