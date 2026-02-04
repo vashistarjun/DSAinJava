@@ -2,6 +2,7 @@ class Solution {
     public int lengthOfLongestSubstring(String s) {
         LinkedHashSet<Character> set= new LinkedHashSet<>();
         int max=0;
+        int left=0;
         for(int i=0;i<s.length();i++){
             char ch=s.charAt(i);
             if(!set.contains(ch)){
@@ -10,8 +11,8 @@ class Solution {
             else{
                 max=Math.max(max,set.size());
                 while (set.contains(ch)) {
-                    Iterator<Character> it = set.iterator();
-                    set.remove(it.next());  // remove first inserted
+                  
+                    set.remove(s.charAt(left++));  // remove first inserted
                 }
                 set.add(ch);
             }
