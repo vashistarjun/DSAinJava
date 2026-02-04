@@ -1,33 +1,32 @@
 class Solution {
     public long maximumSubarraySum(int[] nums, int k) {
-        long max = 0;
-        long sum = 0;
-        LinkedHashSet<Integer> set = new LinkedHashSet<>();
-        int left = 0;
+        long ans=0;
+        long max=0;
+        int left=0;
+        LinkedHashMap<Integer,Integer> map= new LinkedHashMap<>();
+        for(int i=0;i<nums.length;i++){
 
-        for (int i = 0; i < nums.length; i++) {
-            if (!set.contains(nums[i])) {
-                sum += nums[i];
-                set.add(nums[i]);
-            } else {
-                while (set.contains(nums[i])) {
-                    set.remove(nums[left]);
-                    sum -= nums[left++];
+            if(!map.containsKey(nums[i])){
+                map.put(nums[i],1);
+                 ans+=nums[i];
+            }
+            else{
+                while(map.containsKey(nums[i])){
+                    map.remove(nums[left]);
+                    ans-=nums[left++];
                 }
-                set.add(nums[i]);
-                sum += nums[i];
+                map.put(nums[i],1);
+                ans+=nums[i];
             }
-
-            if (set.size() == k) {
-                max = Math.max(sum, max);
+            if(map.size()==k){
+                max=Math.max(max,ans);
             }
-            else if(set.size()>k){
-                set.remove(nums[left]);
-                sum-=nums[left++];
-                  max = Math.max(sum, max);
+            else if(map.size()>k){
+                map.remove(nums[left]);
+                ans-=nums[left++];
+                  max=Math.max(max,ans);
             }
         }
-
-        return max;
+            return max;
     }
 }
