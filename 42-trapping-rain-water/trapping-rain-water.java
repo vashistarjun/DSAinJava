@@ -12,8 +12,9 @@ class Solution {
             suf[i]=Math.max(suf[i+1],height[i]);
         }
         int total=0;
+        int left=0;
         for(int i=0;i<n;i++){
-            int left=pre[i];
+             left=Math.max(left,height[i]);
             int right=suf[i];
             if(left>height[i] && right>height[i]){
                 total+=Math.min(left,right)-height[i];
