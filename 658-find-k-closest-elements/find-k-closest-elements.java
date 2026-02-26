@@ -4,29 +4,29 @@ class Solution {
        
         int ceil=findCeil(arr,x);
         
-        List<Integer> list= new ArrayList<>();
+        LinkedList<Integer> list= new LinkedList<>();
         int i=idx-1;
         int j=idx;;
         while(k>0){
             if (i < 0) {
-                list.add(arr[j++]);
+                list.addLast(arr[j++]);
             }
             else if (j >= arr.length) {
-                list.add(arr[i--]);
+                list.addFirst(arr[i--]);
             }
            else  if(Math.abs(x-arr[i]) > Math.abs(x-arr[j])){
-                list.add(arr[j]);
+                list.addLast(arr[j]);
                 
                 j++;
             }
             else         {
-               list.add(arr[i]);
+               list.addFirst(arr[i]);
                i--;  
               
             }
             k--;
         }
-        Collections.sort(list);
+       // Collections.sort(list);
         return list;
     }
    public int findCeil(int[] arr, int target) {
