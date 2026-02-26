@@ -1,27 +1,27 @@
 class Solution {
-    public boolean checkInclusion(String s, String p) {
-        boolean flag=false;
-         for(int i=0;i<=p.length()-s.length();i++){
-            if(check(p.substring(i,i+s.length()),s)){
-               flag=true;
-                break;
+    public boolean checkInclusion(String s1, String s2) {
+        int freq[]= new int[26];
+        for(char ch:s1.toCharArray()){
+            freq[ch-'a']++;
+        }
+        int left=0;
+        int right=0;
+        int count=s1.length();
+        while(right<s2.length()){
+            if(freq[s2.charAt(right)-'a']>0){
+                count--;
+            }
+            freq[s2.charAt(right)-'a']--;
+            right++;
+            if(count==0) return true;
+            while(right-left==s1.length()){
+                if(freq[s2.charAt(left)-'a']>=0){
+                    count++;
+                }
+                freq[s2.charAt(left)-'a']++;
+                left++;
             }
         }
-        return flag;
+        return false;
     }
-    public boolean check(String s,String p){
-        if(s.length()!=p.length()) return false;
-       int freqs[]= new int[26];
-       int freqp[]= new int[26];
-       for(int i=0;i<p.length();i++){
-        char ch=s.charAt(i);
-        char ch2=p.charAt(i);
-        freqs[ch-'a']++;
-        freqp[ch2-'a']++;
-       }
-       for(int i=0;i<26;i++){
-        if(freqs[i]!=freqp[i]) return false;
-       }
-        return true;
-    }
-    }
+}
