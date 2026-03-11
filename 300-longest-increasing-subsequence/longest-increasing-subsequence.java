@@ -1,18 +1,18 @@
 class Solution {
     Integer dp[][];
     public int lengthOfLIS(int[] nums) {
-        int n=nums.length;
-        dp= new Integer[n][n+1];
-        return f(0,-1,nums);
+        dp= new Integer[nums.length+1][nums.length+1];
+        return f(-1,-0,nums);
     }
-    public int f(int index,int prev,int nums[]){
-        if(index==nums.length)return 0;
-        if(dp[index][prev+1]!=null) return dp[index][prev+1];
-        int npick=f(index+1,prev,nums);
-        int pick=Integer.MIN_VALUE;
+    public int f(int prev,int index,int []nums){
+        if(index==nums.length) return 0;
+        if(dp[prev+1][index]!=null) return dp[prev+1][index];
+        int n=Integer.MIN_VALUE;
+
         if(prev==-1 || nums[prev]<nums[index]){
-            pick=1+f(index+1,index,nums);
+             n=1+f(index,index+1,nums);
         }
-        return dp[index][prev+1]=Math.max(npick,pick);
+            int take=f(prev,index+1,nums);
+            return dp[prev+1][index]=Math.max(n,take);
     }
 }
