@@ -1,18 +1,20 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        return f(nums,goal)-f(nums,goal-1);
+     return f(nums,goal)-f(nums,goal-1);   
     }
     public int f(int nums[],int goal){
-        int count=0;
+        if(goal<0) return 0;
         int left=0;
         int sum=0;
-         if (goal < 0) return 0;
-        for(int right=0;right<nums.length;right++){
+        int right=0;
+        int count=0;
+        while(right<nums.length){
             sum+=nums[right];
             while(sum>goal){
                 sum-=nums[left++];
             }
-           count+=right-left+1;
+            count+=right-left+1;
+            right++;
         }
         return count;
     }
