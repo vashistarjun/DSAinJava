@@ -1,30 +1,23 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        Arrays.sort(nums);
-        int n=nums.length;
-        List<List<Integer>> list= new ArrayList<>();
-        for(int i=0;i<n;i++){
-             if(i > 0 && nums[i] == nums[i - 1]) continue;
-            int left=i+1;
-            int right=n-1;
-            while(left<right){
-                int sum=nums[i]+nums[left]+nums[right];
-                if(sum==0){
+        int n = nums.length;
+        Set<List<Integer>> list = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            int target = -nums[i];
+            HashMap<Integer,Integer> map= new HashMap<>();
+            for(int j=i+1;j<n;j++){
+                int need=target-nums[j];
+                if(map.containsKey(need)){
                     List<Integer> l= new ArrayList<>();
                     l.add(nums[i]);
-                    l.add(nums[left]);
-                    l.add(nums[right]);
+                    l.add(nums[j]);
+                    l.add(need);
+                    Collections.sort(l);
                     list.add(l);
-                
-                while(left<right && nums[left]==nums[left+1]) left++;
-                while(left<right && nums[right]==nums[right-1]) right--;
-                left++;
-                right--;
                 }
-                else if(sum<0) left++;
-                else right--;
+                map.put(nums[j],j);
             }
         }
-        return list;
+        return new ArrayList<>(list);
     }
 }
