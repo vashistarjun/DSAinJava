@@ -4,11 +4,10 @@ class Solution {
         int left=0;
         int right=height.length-1;
         while(left<right){
-            int dist=right-left;
-            int small=Math.min(height[left],height[right]);
-            int n=dist*small;
-            max=Math.max(max,n);
-            if(small==height[left]) left++;
+            int min=Math.min(height[left],height[right]);
+            int d=(right-left)*min;
+            max=Math.max(max,d);
+            if(min==height[left]) left++;
             else right--;
         }
         return max;
