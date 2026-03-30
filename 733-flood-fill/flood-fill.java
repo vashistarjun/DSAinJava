@@ -2,31 +2,37 @@ class Solution {
     public int[][] floodFill(int[][] image, int sr, int sc, int color) {
         int n=image.length;
         int m=image[0].length;
-        int visited[][]= new int[n][m];
-      int ans[][] = new int[n][m];
-for (int i = 0; i < n; i++) 
-    ans[i] = image[i].clone();
-
-        ans[sr][sc]=color;
-        visited[sr][sc]=1;
-        int original=image[sr][sc];
-        Queue<int[]> queue= new LinkedList<>();
-        queue.add(new int[]{sr,sc});
-        while(!queue.isEmpty()){
-            int []poll=queue.poll();
-            int row=poll[0];
-            int col=poll[1];
-            int dir[][]={{1,0},{0,1},{-1,0},{0,-1}};
-            for(int d[]:dir){
-            int r=d[0]+row;
-            int c=d[1]+col;
-            if(r>=0 && r<n && c>=0 && c<m && visited[r][c]==0 && image[r][c]==original){
-                ans[r][c]=color;
-                visited[r][c]=1;
-                queue.add(new int[]{r,c});
-            }
+     
+        int visited[][]=new int[n][m];
+        int scolor=image[sr][sc];
+     
+       
+        dfs(sr,sc,color,scolor,image,visited);
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(visited[i][j]==1){
+                    visited[i][j]=color;
+                }
+                else{
+                    visited[i][j]=image[i][j];
+                }
             }
         }
-        return ans;
+        return visited;
+    }
+    public void dfs(int row,int col,int color,int scolor,int image[][],int visited[][]){
+        int n=image.length;
+        int m=image[0].length;
+
+        if(row<0 || row>=n || col<0 || col>=m || 
+        visited[row][col]==1 || image[row][col]!=scolor) return;
+
+         visited[row][col]=1;
+
+         dfs(row+1,col,color,scolor,image,visited);
+          dfs(row,col-1,color,scolor,image,visited);
+           dfs(row-1,col,color,scolor,image,visited);
+            dfs(row,col+1,color,scolor,image,visited);
+
     }
 }
