@@ -14,6 +14,9 @@ class Solution {
         return gcd(b,a%b);
     }
     public ListNode insertGreatestCommonDivisors(ListNode head) {
+         if(head == null || head.next == null) {
+            return head;
+        }
         ListNode temp=head;
         while(temp.next!=null){
             int x=temp.val;
