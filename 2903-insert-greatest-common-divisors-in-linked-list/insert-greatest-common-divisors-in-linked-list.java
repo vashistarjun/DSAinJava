@@ -14,23 +14,17 @@ class Solution {
         return gcd(b,a%b);
     }
     public ListNode insertGreatestCommonDivisors(ListNode head) {
-      List<Integer> list= new ArrayList<>();
-      ListNode temp=head;
-      while(temp.next!=null){
-        int a=temp.val;
-        int b=temp.next.val;
-        list.add(gcd(a,b));
-        temp=temp.next;
-      }
-       temp=head;
-      int i=0;
-      while(i<list.size() && temp!=null){
-        ListNode next=temp.next;
-        ListNode newNode= new ListNode(list.get(i++));
-        temp.next=newNode;
-        newNode.next=next;
-        temp=next;
-      }
-      return head;
+        ListNode temp=head;
+        while(temp.next!=null){
+            int x=temp.val;
+            int y=temp.next.val;
+            int z=gcd(x,y);
+            ListNode newNode= new ListNode(z);
+            ListNode next=temp.next;
+            newNode.next=temp.next;
+            temp.next=newNode;
+            temp=next;
+        }
+        return head;
     }
 }
