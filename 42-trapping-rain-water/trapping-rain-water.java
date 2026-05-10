@@ -14,7 +14,7 @@ class Solution {
         int total=0;
         int left=0;
         for(int i=0;i<n;i++){
-             left=Math.max(left,height[i]);
+             left=pre[i];
             int right=suf[i];
             if(left>height[i] && right>height[i]){
                 total+=Math.min(left,right)-height[i];
